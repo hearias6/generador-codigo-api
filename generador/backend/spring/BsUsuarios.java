@@ -1,1 +1,0 @@
-import java.com.entidad; @entity@table(value='BS_USUARIOS')class BS_USUARIOS(){@Columnprivate null;@Columnprivate null;}

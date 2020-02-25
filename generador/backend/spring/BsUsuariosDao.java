@@ -1,1 +1,0 @@
-import org.springframework.data.jpa.repository.JpaRepository;import org.springframework.stereotype.Repository;import com.harias.app.entities.HaContrato;@Repositorypublic interface HaContratoDao extends JpaRepository<HaContrato, Long>{}

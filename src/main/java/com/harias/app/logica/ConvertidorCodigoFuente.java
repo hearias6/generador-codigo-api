@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.harias.app.archivo.OrganizarNombreArchivo;
 import com.harias.app.model.ArchivoFuente;
 
 public class ConvertidorCodigoFuente {
@@ -20,7 +19,7 @@ public class ConvertidorCodigoFuente {
 	
 	private ArrayList<ArchivoFuente> archivosFuentes;
 	
-	private OrganizarNombreArchivo organizarNombreArchivo = new OrganizarNombreArchivo();
+	private GenerarNuevoNombre organizarNombreArchivo = new GenerarNuevoNombre();
 
 	public ConvertidorCodigoFuente() {
 		super();
@@ -84,9 +83,13 @@ public class ConvertidorCodigoFuente {
 		logger.info("crearNombreArchivo() ");
 		String nombre = this.prefijo + this.nombreTabla + this.subfijo + "." + this.extension;
 		
-		organizarNombreArchivo.setNombreArchivo(nombre);
-		organizarNombreArchivo.generarNombreArchivo();
-		nombre = organizarNombreArchivo.getNombreArchivo();
+//		organizarNombreArchivo.setNombreArchivo(nombre);
+//		organizarNombreArchivo.generarNombreArchivo();
+//		nombre = organizarNombreArchivo.getNombreArchivo();
+		
+		organizarNombreArchivo.setPalabra(nombre);
+		organizarNombreArchivo.convertir();
+		nombre = organizarNombreArchivo.getNuevaPalabra();
 		
 		logger.info("archivo fuente : " + nombre);
 		return nombre;

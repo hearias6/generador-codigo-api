@@ -1,16 +1,16 @@
 package com.harias.app.spring;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.harias.app.archivo.ArchivoImpl;
 import com.harias.app.generador.GeneradorImplementor;
-import com.harias.app.model.ArchivoFuente;
 import com.harias.app.model.Proyecto;
+import com.harias.app.model.Tecnologia;
 
 public class GenerarSpringBoot2 implements GeneradorImplementor{
 
@@ -23,13 +23,14 @@ public class GenerarSpringBoot2 implements GeneradorImplementor{
 	@Override
 	public void generarCodigo(Proyecto proyecto) {
 		
+		List<Tecnologia> tecnologias = proyecto.getTecnologias()
+		.stream()
+		.filter(t->t.getId() == 1l).collect(Collectors.toList());
+		
 		springBoot2.setTablas(proyecto.getTablas());
+		springBoot2.setDirectorios(tecnologias.get(0).getDirectorios());
 		springBoot2.generarSpringBoot2();
 		springBoot2.getArchivosFuentes().forEach(archivo->{
-			
-			logger.info("Archivo Fuente " + archivo.getNombreArchivo());
-			logger.info("codigo fuente " + archivo.getCodigoFuente());
-			
 			try {
 				archivoImpl.crearArchivo(RUTA + archivo.getNombreArchivo(), archivo.getCodigoFuente());
 			} catch (IOException e) {
@@ -37,7 +38,6 @@ public class GenerarSpringBoot2 implements GeneradorImplementor{
 				e.printStackTrace();
 			}
 		});
-			
 		
 	}
 
